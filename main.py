@@ -82,17 +82,18 @@ def wallet(info, create, save):
         click.echo(account.address)
         
     # Check if mnemonic file already exists, if it exists don't allow to replace
-    with open('mnemonic.txt') as f:
-        lines = f.readlines()
-        if (len(lines) > 0):
-            click.echo("Mnemonic file already exists. Please consider before replacing the mnemonic.")
-            return
+    if (os.path.exists('mnemonic.txt')):
+        with open('mnemonic.txt', 'r') as f:
+            lines = f.readlines()
+            if (len(lines) > 0):
+                click.echo("Mnemonic file already exists. Please consider before replacing the mnemonic.")
+                return
     
     if (create):
         web3 = Web3()
         web3.eth.account.enable_unaudited_hdwallet_features()
-        mnemonic = web3.eth.account.generate_mnemonic()
-        account = web3.eth.account.from_mnemonic(mnemonic, account_path="m/44'/60'/0'/0/0")
+        account, mnemonic = web3.eth.account.create_with_mnemonic()
+        # account = web3.eth.account.from_mnemonic(mnemonic, account_path="m/44'/60'/0'/0/0")
         click.echo("Address: " + account.address)
         click.echo("Mnemonic: " + mnemonic)
         click.echo("Please save this mnemonic in a safe place. This will be used to recover your wallet in the future.")
