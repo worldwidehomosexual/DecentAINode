@@ -93,7 +93,6 @@ def wallet(info, create, save):
         web3 = Web3()
         web3.eth.account.enable_unaudited_hdwallet_features()
         account, mnemonic = web3.eth.account.create_with_mnemonic()
-        # account = web3.eth.account.from_mnemonic(mnemonic, account_path="m/44'/60'/0'/0/0")
         click.echo("Address: " + account.address)
         click.echo("Mnemonic: " + mnemonic)
         click.echo("Please save this mnemonic in a safe place. This will be used to recover your wallet in the future.")
@@ -116,3 +115,23 @@ def wallet(info, create, save):
             f.write(mnemonic)
             
 
+def start():
+
+    # This code should start to run when the user runs the command. 
+    # It should check if the wallet exists.
+    # Start to run the while true script
+   
+    # ## Main purpose of the Inference node
+    # 1. Run a loop to fetch past events from the Inference Manager contract and get latest unfulfilled inference requests and request pramas
+    # 2. Use the local GPU or remote GPU to create an inference output (.jpg in this case)
+    # 3. Submit a transaction to the Inference Manager to get rewarded
+
+    # ## Side goals
+    # 1. Ensure model good-ness to not slide on reputation rank
+    # 2. Ensure that the node is registered on the Inference Manager
+    # 3. Do a simulation right before submitting the result to ensure that the transaction will be successful, if not discard the result and listen for next request
+    
+    
+
+    
+    pass
