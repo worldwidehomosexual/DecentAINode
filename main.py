@@ -3,6 +3,7 @@ import pyperclip
 # from app import application
 from web3 import Web3
 import os
+from chain import main_loop
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -114,7 +115,7 @@ def wallet(info, create, save):
         with open('mnemonic.txt', 'w') as f:
             f.write(mnemonic)
             
-
+@cli.command()
 def start():
 
     # This code should start to run when the user runs the command. 
@@ -131,7 +132,7 @@ def start():
     # 2. Ensure that the node is registered on the Inference Manager
     # 3. Do a simulation right before submitting the result to ensure that the transaction will be successful, if not discard the result and listen for next request
     
-    
+    main_loop()
 
     
     pass
