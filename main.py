@@ -50,7 +50,7 @@ def generate(length, option):
 def wallet(info, create, save):
     
     # only one of the the parameters can be true
-    if (info + create + save) > 1:
+    if (info + create + (save is not None)) > 1:
         click.echo("Only one of the parameters can be true")
         return
     
