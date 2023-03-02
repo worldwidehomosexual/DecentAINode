@@ -46,7 +46,7 @@ def generate(length, option):
 @cli.command()
 @click.option("-i", "--info", is_flag=True, show_default=True, default=False, help="Get wallet associated to the node.")
 @click.option("-c", "--create", is_flag=True, show_default=True, default=False, help="Create a new wallet if it doesn't exist.")
-@click.option("-s", "--save", prompt=True, default="", help="Save user's provided seed phrase and treat that as the wallet.")
+@click.option("-s", "--save", prompt=True, prompt_required=False, help="Save user's provided seed phrase and treat that as the wallet.")
 def wallet(info, create, save):
     
     # only one of the the parameters can be true
