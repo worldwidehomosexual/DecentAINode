@@ -2,6 +2,7 @@ import click
 import pyperclip
 # from app import application
 from web3 import Web3
+import os
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -57,6 +58,12 @@ def wallet(info, create, save):
         web3 = Web3()
         web3.eth.account.enable_unaudited_hdwallet_features()
         mnemonic = ""
+        
+        # ensure that mnemonic file exists
+        if (not (os.path.exists('mnemonic.txt'))):
+            click.echo("Mnemonic file doesn't exist. Please create a new wallet using the -c flag or save a wallet using -s")
+            return
+        
         with open('mnemonic.txt') as f:
             lines = f.readlines()
             if (len(lines) == 0):
@@ -106,3 +113,5 @@ def wallet(info, create, save):
         click.echo("Please save this mnemonic in a safe place. This will be used to recover your wallet in the future.")
         with open('mnemonic.txt', 'w') as f:
             f.write(mnemonic)
+            
+
