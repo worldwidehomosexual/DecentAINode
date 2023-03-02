@@ -1,0 +1,2 @@
+[console_scripts]
+dinfer = main:cli
