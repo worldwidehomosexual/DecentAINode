@@ -44,7 +44,15 @@ def infer(prompt, request_id, strength=.75, num_inference_steps=70, guidance_sca
     global pipe
     if (pipe is None):
         # clearGPU()
-        pipe = StableDiffusionPipeline.from_pretrained(model_path, torch_dtype=torch.float16, safety_checker=dummy).to(device)
+        if not os.path.exists("pretrained/model"):
+            pipe = StableDiffusionPipeline.from_pretrained(model_path, torch_dtype=torch.float16, safety_checker=dummy).to(device)
+            newpath = "pretrained"
+            if not os.path.exists(newpath):
+                os.makedirs(newpath)
+            pipe.save_pretrained("pretrained/model")
+        else:
+            pipe = StableDiffusionPipeline.from_pretrained("pretrained/model", torch_dtype=torch.float16, safety_checker=dummy).to(device)
+        
         
         
     
@@ -56,10 +64,10 @@ def infer(prompt, request_id, strength=.75, num_inference_steps=70, guidance_sca
     # Save it in decentralised storage here
     fname = "amazing_inference.jpg"
     
-    if os.path.isfile("test.png"):
-            os.remove("test.png")
-    else:
-        pass
+    # if os.path.isfile("test.png"):
+    #         os.remove("test.png")
+    # else:
+    #     pass
     
     return fname
 
