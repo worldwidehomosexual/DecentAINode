@@ -49,7 +49,7 @@ def infer(prompt, request_id, strength=.75, num_inference_steps=70, guidance_sca
         
     
     generator = torch.Generator(device=device).manual_seed(1024)
-    image = pipe(prompt=prompt, strength=0.5, guidance_scale=10, num_inference_steps=70, generator=generator).images[0]
+    image = pipe(prompt=prompt, guidance_scale=10, num_inference_steps=70, generator=generator).images[0]
 
     image.save("test.png")
     
