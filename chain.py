@@ -28,9 +28,12 @@ def handle_event(event):
     request = eval(request)
     fname = infer(request["args"]["prompt"], request["args"]["requestId"])
     
+    print("Got back infernence, now make call to contract")
+    print(request["args"]["requestId"], fname)
+    
     # Just submit it rn, add tenderly later
-    simulate = fContract.functions.recieveInference(request["args"]["requestId"], fname).call()
-    print(simulate)
+    # simulate = fContract.functions.recieveInference(request["args"]["requestId"], fname).call()
+    # print(simulate)
     
     # Get account
     mnemonic = ""
