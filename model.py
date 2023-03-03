@@ -1,5 +1,6 @@
 
-from diffusers import StableDiffusionImg2ImgPipeline
+# from diffusers import StableDiffusionImg2ImgPipeline
+from diffusers import StableDiffusionPipeline
 import torch
 import requests
 from PIL import Image
@@ -43,7 +44,7 @@ def infer(prompt, request_id, strength=.75, num_inference_steps=70, guidance_sca
     global pipe
     if (pipe is None):
         # clearGPU()
-        pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_path, torch_dtype=torch.float16, safety_checker=dummy).to(device)
+        pipe = StableDiffusionPipeline.from_pretrained(model_path, torch_dtype=torch.float16, safety_checker=dummy).to(device)
         
         
     
