@@ -3,6 +3,7 @@ from web3 import Web3
 import json
 from web3.providers.rpc import HTTPProvider
 import asyncio
+from model import infer
 
 
 contractAddress = '0x24506584c6e294982213aD56f774edA62462bB04'
@@ -23,7 +24,52 @@ fContract = web3.eth.contract(abi=abi,address=address2)
 # define function to handle events and print to the console
 def handle_event(event):
     print(Web3.toJSON(event))
-    # and whatever
+    request = Web3.toJSON(event)
+    fname = infer(request["args"]["prompt"], request["args"]["requestId"])
+    
+    # Just submit it rn, add tenderly later
+    simulate = fContract.functions.recieveInference(request["args"]["requestId"], fname).call()
+    print(simulate)
+    
+    # Get account
+    mnemonic = ""
+    with open('mnemonic.txt') as f:
+        lines = f.readlines()
+        mnemonic = lines[0]
+    account = web3.eth.account.from_mnemonic(mnemonic, account_path="m/44'/60'/0'/0/0")
+    print("Got account : ", account.address)
+    tx = fContract.functions.recieveInference(request["args"]["requestId"], fname).buildTransaction({'nonce': web3.eth.getTransactionCount(account.address)})
+    print(tx)
+    signed_tx = web3.eth.account.signTransaction(tx, private_key=account.key)
+    print(signed_tx)
+    sentTx = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+    print(sentTx)
+    
+    
+    # Create a submit inference transaction
+    # and send to tenderly to simulate if success, if success then send to the blockchain
+    # else just log as would have failed and credit tenderly the amount saved
+    
+    # Sample output
+    # {
+    #     "args": {
+    #         "requestor": "0x8A0B9D49252825211b512b719258507Fa3Fda69E",
+    #         "responder": "0x8A0B9D49252825211b512b719258507Fa3Fda69E",
+    #         "requestId": 2,
+    #         "prompt": "People skiing in denver snow",
+    #         "offer": 0
+    #     },
+    #     "event": "RequestRecieved",
+    #     "logIndex": 199,
+    #     "transactionIndex": 47,
+    #     "transactionHash": "0x0adcb2ed50a043ff309791cd164e54853bed11485b589dff2c1045f0aca1bea2",
+    #     "address": "0x7C14dd39c29a22E69b99E41f7A3E607bfb63d244",
+    #     "blockHash": "0x9713b2773eb37ccab7aa9f6cce9f14f5cca47a1673a6c67e08c2fa8b8314ae1d",
+    #     "blockNumber": 39896349
+    # }
+    
+
+    
 
 
 # asynchronous defined function to loop

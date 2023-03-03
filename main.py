@@ -81,6 +81,7 @@ def wallet(info, create, save):
             
         account = web3.eth.account.from_mnemonic(mnemonic, account_path="m/44'/60'/0'/0/0")
         click.echo(account.address)
+        return
         
     # Check if mnemonic file already exists, if it exists don't allow to replace
     if (os.path.exists('mnemonic.txt')):
@@ -99,6 +100,7 @@ def wallet(info, create, save):
         click.echo("Please save this mnemonic in a safe place. This will be used to recover your wallet in the future.")
         with open('mnemonic.txt', 'w') as f:
             f.write(mnemonic)
+        return
     
     if (save):
         web3 = Web3()
@@ -114,7 +116,13 @@ def wallet(info, create, save):
         click.echo("Please save this mnemonic in a safe place. This will be used to recover your wallet in the future.")
         with open('mnemonic.txt', 'w') as f:
             f.write(mnemonic)
-            
+        return
+    
+# Add code to register/update the node on the Inference Manager contract
+def register(cost):
+    pass
+
+# Simulate mode to calculate possible revenue vs runtime
 @cli.command()
 def start():
 
