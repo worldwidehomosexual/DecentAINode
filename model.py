@@ -36,14 +36,16 @@ def clearGPU():
 # This can be anything that the node operator desirs
 model_path = "runwayml/stable-diffusion-v1-5"
 def dummy(images, **kwargs): return images, False
-global pipe
+
 pipe = None
 
 def infer(prompt, request_id, strength=.75, num_inference_steps=70, guidance_scale=11, num_images_per_prompt=1):
-    
+    global pipe
     if (pipe is None):
         clearGPU()
         pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_path, torch_dtype=torch.float16, safety_checker=dummy).to(device)
+        
+        
     
     generator = torch.Generator(device=device).manual_seed(1024)
     image = pipe(prompt=prompt, strength=0.5, guidance_scale=10, num_inference_steps=70, generator=generator).images[0]

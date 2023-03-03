@@ -6,7 +6,7 @@ import asyncio
 from model import infer
 
 
-contractAddress = '0x24506584c6e294982213aD56f774edA62462bB04'
+contractAddress = '0x7C14dd39c29a22E69b99E41f7A3E607bfb63d244'
 address2 = Web3.toChecksumAddress(contractAddress)
 
 PROVIDER = "wss://polygon-mainnet.g.alchemy.com/v2/_tn9X7pFnXwYXYi8Q33gQjRg_B3Dey_4"
@@ -25,6 +25,7 @@ fContract = web3.eth.contract(abi=abi,address=address2)
 def handle_event(event):
     print(Web3.toJSON(event))
     request = Web3.toJSON(event)
+    request = eval(request)
     fname = infer(request["args"]["prompt"], request["args"]["requestId"])
     
     # Just submit it rn, add tenderly later
@@ -88,7 +89,7 @@ async def log_loop(event_filter, poll_interval):
 # try to run the log_loop function above every 2 seconds
 def main_loop():
     
-    event_filter = fContract.events.RequestRecieved.createFilter(fromBlock='latest')
+    event_filter = fContract.events.RequestRecieved.createFilter(fromBlock=39891331)
     #block_filter = web3.eth.filter('latest')
     # tx_filter = web3.eth.filter('pending')
     loop = asyncio.get_event_loop()
