@@ -1,12 +1,11 @@
 
 
-from web3 import Web3
 import json
-from web3.providers.rpc import HTTPProvider
-from web3.middleware import geth_poa_middleware
+# from web3.providers.rpc import HTTPProvider
+# from web3.middleware import geth_poa_middleware
 import asyncio
 from model import infer
-from chain import fContract, web3
+from contract import fContract, web3, Web3
 
 
 # contractAddress = '0x7C14dd39c29a22E69b99E41f7A3E607bfb63d244'

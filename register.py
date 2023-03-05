@@ -1,6 +1,5 @@
-from web3 import Web3
 import os
-from chain import fContract
+from contract import fContract, web3, Web3
 from chain import handle_event
 
 
