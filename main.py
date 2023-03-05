@@ -134,7 +134,7 @@ def pinata(key, secret):
 
 # Add code to register/update the node on the Inference Manager contract
 @cli.command()
-@click.option('-c', '--cost', type=int, help='API key provided by pinata')
+@click.option('-c', '--cost', type=int, help='Register on Decent AI Contract as a node')
 def register(cost):
     
     register_on_contract(cost)
