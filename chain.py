@@ -5,15 +5,15 @@ import json
 # from web3.middleware import geth_poa_middleware
 import asyncio
 from model_runner import run_model
-from contract import fContract
+from contract import fContract, web3
 
 
-from web3.providers.rpc import HTTPProvider
-from web3.middleware import geth_poa_middleware
+# from web3.providers.rpc import HTTPProvider
+# from web3.middleware import geth_poa_middleware
 
-PROVIDER = "wss://polygon-mainnet.g.alchemy.com/v2/_tn9X7pFnXwYXYi8Q33gQjRg_B3Dey_4"
-web3 = Web3(Web3.WebsocketProvider(PROVIDER))
-web3.middleware_onion.inject(geth_poa_middleware, layer=0)
+# PROVIDER = "wss://polygon-mainnet.g.alchemy.com/v2/_tn9X7pFnXwYXYi8Q33gQjRg_B3Dey_4"
+# web3 = Web3(Web3.WebsocketProvider(PROVIDER))
+# web3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
 
 # contractAddress = '0x7C14dd39c29a22E69b99E41f7A3E607bfb63d244'
