@@ -45,12 +45,15 @@ def get_pinata_object():
      with open('pinata.txt') as f:
         lines = f.readlines()
         api_key = lines[0]
-        api_key = api_key.decode("utf-8")
+        # api_key = api_key.decode("utf-8")
         secret_api_key = lines[1]
-        secret_api_key = secret_api_key.decode("utf-8")
+        # secret_api_key = secret_api_key.decode("utf-8")
         
         api_key = api_key.split("\n")[0]
         secret_api_key = secret_api_key.split("\n")[0]
+        
+        api_key = api_key.split("'")[1]
+        secret_api_key = secret_api_key.split("'")[1]
         
         pinata = PinataPy(api_key, secret_api_key)
         return pinata
