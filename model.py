@@ -112,7 +112,7 @@ def infer(prompt, request_id, strength=.75, num_inference_steps=70, guidance_sca
         ]
     }
     
-    metadata_ipfs = pinata.pinJSONToIPFS(metadata_json)
+    metadata_ipfs = pinata.pin_json_to_ipfs(metadata_json)
 
     
     if os.path.isfile("test.png"):
