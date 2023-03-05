@@ -4,6 +4,7 @@ import pyperclip
 from web3 import Web3
 import os
 from chain import main_loop
+from register import register_on_contract
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -117,9 +118,27 @@ def wallet(info, create, save):
         with open('mnemonic.txt', 'w') as f:
             f.write(mnemonic)
         return
+
+@cli.command()
+@click.option('-k', '--key', help='API key provided by pinata')
+@click.option('-s', '--secret', help='API secret provided by pinata')
+def setup_pinata(api_key, secret_api_key):
     
+    # Save the api key and secret api key in a file
+    with open('pinata.txt', 'w') as f:
+        l1 = api_key+"\n"
+        l2 = secret_api_key+"\n"
+        f.writelines([l1, l2])
+    return
+
+
 # Add code to register/update the node on the Inference Manager contract
+@cli.command()
+@click.option('-c', '--cost', type=int, help='API key provided by pinata')
 def register(cost):
+    
+    register_on_contract(cost)
+    
     pass
 
 # Simulate mode to calculate possible revenue vs runtime

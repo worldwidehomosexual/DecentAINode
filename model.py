@@ -40,6 +40,15 @@ def dummy(images, **kwargs): return images, False
 
 pipe = None
 
+def get_pinata_object():
+     with open('pinata.txt') as f:
+        lines = f.readlines()
+        api_key = lines[0]
+        secret_api_key = lines[1]
+        
+        pinata = PinataPy(api_key, secret_api_key)
+        return pinata
+
 def infer(prompt, request_id, strength=.75, num_inference_steps=70, guidance_scale=11, num_images_per_prompt=1):
     global pipe
     if (pipe is None):
@@ -61,13 +70,47 @@ def infer(prompt, request_id, strength=.75, num_inference_steps=70, guidance_sca
 
     image.save("test.png")
     
-    # Save it in decentralised storage here
-    fname = "amazing_inference.jpg"
+    pinata = get_pinata_object()
     
-    # if os.path.isfile("test.png"):
-    #         os.remove("test.png")
-    # else:
-    #     pass
+    file_ipfs = pinata.pin_file_to_ipfs("test.png")
     
-    return fname
+    metadata_json = {
+        "name": "Decent AI Inference",
+        "description": prompt,
+        "image": file_ipfs["IpfsHash"],
+        "attributes": [
+            {
+                "trait_type": "Model",
+                "value": "runwayml/stable-diffusion-v1-5"
+            },
+            {
+                "display_type": "number",
+                "trait_type": "guidance_scale",
+                "value": 10
+            },
+            {
+                "display_type": "number",
+                "trait_type": "num_inference_steps",
+                "value": 70
+            },
+            {
+                "display_type": "number",
+                "trait_type": "generator_seed",
+                "value": 1024
+            }
+        ]
+    }
+    
+    metadata_ipfs = pinata.pinJSONToIPFS(metadata_json)
+
+    
+    if os.path.isfile("test.png"):
+            os.remove("test.png")
+    else:
+        pass
+    
+    
+    
+    return metadata_ipfs["IpfsHash"]
+
 

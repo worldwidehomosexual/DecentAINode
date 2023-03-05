@@ -2,5 +2,8 @@
 **/mnemonic*.txt
 mnemonic.txt*
 
+**/pinata*.txt
+pinata.txt*
+
 # Pre-trained model
 pretrained/

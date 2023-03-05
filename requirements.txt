@@ -8,3 +8,4 @@ accelerate
 GPUtil==1.4.0
 numba==0.56.4
 typing==3.7.4.3
+pinatapy-vourhey==0.1.8
