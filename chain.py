@@ -92,7 +92,7 @@ def main_loop():
         mnemonic = lines[0]
     account = web3.eth.account.from_mnemonic(mnemonic, account_path="m/44'/60'/0'/0/0")
     
-    event_filter = fContract.events.RequestRecieved.createFilter(fromBlock='latest') # , argument_filters={'responder': account.address}
+    event_filter = fContract.events.RequestRecieved.createFilter(fromBlock='latest', argument_filters={'responder': account.address}) # , argument_filters={'responder': account.address}
     #block_filter = web3.eth.filter('latest')
     # tx_filter = web3.eth.filter('pending')
     loop = asyncio.get_event_loop()
