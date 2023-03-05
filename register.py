@@ -1,21 +1,20 @@
 import os
 from contract import fContract
-from chain import handle_event
+from chain import handle_event, web3, Web3
 
-from web3 import Web3
-import json
-from web3.providers.rpc import HTTPProvider
-from web3.middleware import geth_poa_middleware
+# from web3 import Web3
+# import json
+# from web3.providers.rpc import HTTPProvider
+# from web3.middleware import geth_poa_middleware
 
-PROVIDER = "wss://polygon-mainnet.g.alchemy.com/v2/_tn9X7pFnXwYXYi8Q33gQjRg_B3Dey_4"
-web3 = Web3(Web3.WebsocketProvider(PROVIDER))
-web3.middleware_onion.inject(geth_poa_middleware, layer=0)
+# PROVIDER = "wss://polygon-mainnet.g.alchemy.com/v2/_tn9X7pFnXwYXYi8Q33gQjRg_B3Dey_4"
+# web3 = Web3(Web3.WebsocketProvider(PROVIDER))
+# web3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
 
 def register_on_contract(cost):
     
     # Get account
-    web3 = Web3()
     web3.eth.account.enable_unaudited_hdwallet_features()
     mnemonic = ""
     with open('mnemonic.txt') as f:
