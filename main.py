@@ -126,8 +126,8 @@ def pinata(key, secret):
     
     # Save the api key and secret api key in a file
     with open('pinata.txt', 'w') as f:
-        l1 = api_key+"\n"
-        l2 = secret_api_key+"\n"
+        l1 = key+"\n"
+        l2 = secret+"\n"
         f.writelines([l1, l2])
     return
 
