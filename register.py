@@ -1,6 +1,7 @@
 import os
 from contract import fContract
 from chain import handle_event, web3, Web3
+from model import get_pinata_object
 
 
 def register_on_contract(cost):
