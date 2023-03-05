@@ -16,6 +16,7 @@ device = "cuda"
 import inspect
 import warnings
 from typing import List, Optional, Union
+from pinatapy import PinataPy
 
 
 def clearGPU():
