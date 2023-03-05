@@ -48,7 +48,7 @@ def run_model(prompt, request_id):
     account = web3.eth.account.from_mnemonic(mnemonic, account_path="m/44'/60'/0'/0/0")
 
     chain_id = web3.eth.chain_id
-    tx = fContract.functions.recieveInference(request["args"]["requestId"], fname).buildTransaction({
+    tx = fContract.functions.recieveInference(request_id, fname).buildTransaction({
         "chainId": chain_id,
         'nonce': web3.eth.getTransactionCount(account.address),
         'from': account.address
