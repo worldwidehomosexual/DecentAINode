@@ -52,8 +52,10 @@ def get_pinata_object():
         api_key = api_key.split("\n")[0]
         secret_api_key = secret_api_key.split("\n")[0]
         
-        api_key = api_key.split("'")[1]
-        secret_api_key = secret_api_key.split("'")[1]
+        # api_key = api_key.split("'")[1]
+        # secret_api_key = secret_api_key.split("'")[1]
+        
+        print(api_key, secret_api_key)
         
         pinata = PinataPy(api_key, secret_api_key)
         return pinata
