@@ -11,7 +11,8 @@ address2 = Web3.toChecksumAddress(contractAddress)
 
 # PROVIDER = "wss://polygon-mainnet.g.alchemy.com/v2/_tn9X7pFnXwYXYi8Q33gQjRg_B3Dey_4"
 PROVIDER = "https://goerli.base.org"
-web3 = Web3(Web3.WebsocketProvider(PROVIDER))
+# web3 = Web3(Web3.WebsocketProvider(PROVIDER))
+web3 = Web3(Web3.HTTPProvider(PROVIDER))
 web3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
 import json
