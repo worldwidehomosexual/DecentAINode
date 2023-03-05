@@ -122,7 +122,7 @@ def wallet(info, create, save):
 @cli.command()
 @click.option('-k', '--key', help='API key provided by pinata')
 @click.option('-s', '--secret', help='API secret provided by pinata')
-def pinata(api_key, secret_api_key):
+def pinata(key, secret):
     
     # Save the api key and secret api key in a file
     with open('pinata.txt', 'w') as f:
