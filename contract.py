@@ -6,14 +6,14 @@ from web3.middleware import geth_poa_middleware
 import asyncio
 
 # Matic
-contractAddress = '0xe9AbD1263b5D024d6FC53fa1F98A4560615761B0'
-PROVIDER = "wss://polygon-mainnet.g.alchemy.com/v2/_tn9X7pFnXwYXYi8Q33gQjRg_B3Dey_4"
-web3 = Web3(Web3.WebsocketProvider(PROVIDER))
+# contractAddress = '0xe9AbD1263b5D024d6FC53fa1F98A4560615761B0'
+# PROVIDER = "wss://polygon-mainnet.g.alchemy.com/v2/_tn9X7pFnXwYXYi8Q33gQjRg_B3Dey_4"
+# web3 = Web3(Web3.WebsocketProvider(PROVIDER))
 
 # Coinbase
-# contractAddress = '0x9d5CD448332A857F6BfDb7541CFc33C61789BB41'
-# PROVIDER = "https://goerli.base.org"
-# web3 = Web3(Web3.HTTPProvider(PROVIDER))
+contractAddress = '0x9d5CD448332A857F6BfDb7541CFc33C61789BB41'
+PROVIDER = "https://goerli.base.org"
+web3 = Web3(Web3.HTTPProvider(PROVIDER))
 
 address2 = Web3.toChecksumAddress(contractAddress)
 web3.middleware_onion.inject(geth_poa_middleware, layer=0)
