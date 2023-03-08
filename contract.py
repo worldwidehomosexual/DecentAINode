@@ -11,7 +11,8 @@ import asyncio
 # web3 = Web3(Web3.WebsocketProvider(PROVIDER))
 
 # Coinbase
-contractAddress = '0x9d5CD448332A857F6BfDb7541CFc33C61789BB41'
+# contractAddress = '0x9d5CD448332A857F6BfDb7541CFc33C61789BB41' # <- bug in safeMint (onlyOwner)
+contractAddress = '0x5755f4B547596c4cc45AA898e076cd75EA10f374'
 PROVIDER = "https://goerli.base.org"
 web3 = Web3(Web3.HTTPProvider(PROVIDER))
 
